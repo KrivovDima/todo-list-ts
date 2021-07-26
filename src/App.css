@@ -1,0 +1,26 @@
+.App {
+  padding: 30px;
+  display: flex;
+}
+
+.App > div {
+  margin-right: 50px;
+}
+
+.activeFilter {
+  background-color: cadetblue;
+  color: #fff;
+}
+
+.error {
+  border: 2px solid tomato;
+}
+
+.errorMessage {
+  color: tomato;
+  opacity: 0;
+}
+
+.errorMessageVisible {
+  opacity: 1;
+}
