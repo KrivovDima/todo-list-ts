@@ -9,8 +9,23 @@ export type taskType = {
   isDone: boolean
 }
 export type filterType = 'all' | 'active' | 'completed'
+type todoListsDefaultType = Array<todoListType>
+type todoListType = {
+  tdID: string
+  title: string
+  filter: filterType
+}
 
 function App() {
+  const tdID1 = v1();
+  const tdID2 = v1();
+
+  const todoListsDefault: todoListsDefaultType = [
+    {tdID: tdID1, title: 'Home tasks', filter: 'all'},
+    {tdID: tdID2, title: 'Learn tasks', filter: 'active'},
+  ];
+
+
   const tasksDefault = [
     {id: v1(), title: "HTML&CSS", isDone: true},
     {id: v1(), title: "JS", isDone: true},
@@ -25,7 +40,7 @@ function App() {
 
   const addTask = (titleTask: string) => {
     const newTask = {id: v1(), title: titleTask, isDone: false}
-    setTasks([...tasks, newTask])
+    setTasks([newTask, ...tasks])
   }
 
   const deleteTask = (idTask: string) => {
@@ -33,14 +48,6 @@ function App() {
     setTasks(unremovedTasks);
   }
 
-  let filteredTasks = [...tasks];
-  switch (filter) {
-    case 'active':
-      filteredTasks = tasks.filter((task) => !task.isDone);
-      break;
-    case 'completed':
-      filteredTasks = tasks.filter((task) => task.isDone);
-  }
 
   const checkedTasks = (idTask: string, checkedStatus: boolean) => {
     const checkedListTasks = tasks.map(
@@ -59,12 +66,38 @@ function App() {
 
   return (
     <div className="App">
-      <TodoList tasks={filteredTasks}
-                deleteTask={deleteTask}
-                setFilter={setFilter}
-                addTask={addTask}
-                checkedTasks={checkedTasks}
-                filter={filter}/>
+      {
+        todoListsDefault.map((tdList) => {
+          let filteredTasks = [...tasks];
+          switch (filter) {
+            case 'active':
+              filteredTasks = tasks.filter((task) => !task.isDone);
+              break;
+            case 'completed':
+              filteredTasks = tasks.filter((task) => task.isDone);
+          }
+
+          return <TodoList
+            key={v1()}
+            title={tdList.title}
+            tdListID={tdList.tdID}
+            tasks={filteredTasks}
+            deleteTask={deleteTask}
+            setFilter={setFilter}
+            addTask={addTask}
+            checkedTasks={checkedTasks}
+            filter={tdList.filter}
+          />
+        })
+      }
+
+      {/*<TodoList tasks={filteredTasks}*/}
+      {/*          deleteTask={deleteTask}*/}
+      {/*          setFilter={setFilter}*/}
+      {/*          addTask={addTask}*/}
+      {/*          checkedTasks={checkedTasks}*/}
+      {/*          filter={filter}*/}
+      {/*/>*/}
     </div>
   );
 }

@@ -2,6 +2,8 @@ import React, {ChangeEvent, KeyboardEvent, MouseEvent, useState} from "react";
 import {filterType, taskType} from "./App";
 
 type TodoListPropsType = {
+  title: string
+  tdListID: string
   tasks: Array<taskType>
   deleteTask: (idTask: string) => void
   setFilter: (filter: filterType) => void
@@ -67,10 +69,9 @@ function TodoList(props: TodoListPropsType) {
     }
   }
 
-
   return (
     <div>
-      <h3>What to learn</h3>
+      <h3>{props.title}</h3>
       <div>
         <input onChange={saveTaskText}
                value={newTask}
