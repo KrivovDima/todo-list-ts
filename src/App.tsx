@@ -33,28 +33,23 @@ function App() {
     ]
   })
 
-  function removeTask(id: string, tdID:string) {
+  function removeTask(id: string, tdID: string) {
     const copyTasks = {...tasks};
     copyTasks[tdID] = tasks[tdID].filter(t => t.id !== id);
     setTasks(copyTasks);
-
-    // let filteredTasks = tasks.filter(t => t.id != id);
-    // setTasks(filteredTasks);
   }
 
-  function addTask(title: string) {
-    // let task = {id: v1(), title: title, isDone: false};
-    // let newTasks = [task, ...tasks];
-    // setTasks(newTasks);
+  function addTask(title: string, tdID: string) {
+    const task = {id: v1(), title: title, isDone: false};
+    const copyTasks = {...tasks};
+    copyTasks[tdID] = [task, ...copyTasks[tdID]];
+    setTasks(copyTasks);
   }
 
-  function changeStatus(taskId: string, isDone: boolean) {
-    // let task = tasks.find(t => t.id === taskId);
-    // if (task) {
-    //   task.isDone = isDone;
-    // }
-    //
-    // setTasks([...tasks]);
+  function changeStatus(taskId: string, isDone: boolean, tdID: string) {
+    const copyTasks = {...tasks};
+    copyTasks[tdID] = tasks[tdID].map(t => t.id === taskId ? {...t, isDone} : t);
+    setTasks(copyTasks);
   }
 
 

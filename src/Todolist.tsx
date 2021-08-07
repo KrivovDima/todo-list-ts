@@ -13,8 +13,8 @@ type PropsType = {
   tasks: Array<TaskType>
   removeTask: (taskId: string, tdID:string) => void
   changeFilter: (value: FilterValuesType, tdID:string) => void
-  addTask: (title: string) => void
-  changeTaskStatus: (taskId: string, isDone: boolean) => void
+  addTask: (title: string, tdID: string) => void
+  changeTaskStatus: (taskId: string, isDone: boolean, tdID: string) => void
   filter: FilterValuesType
 }
 
@@ -25,7 +25,7 @@ export function Todolist(props: PropsType) {
 
   const addTask = () => {
     if (title.trim() !== "") {
-      props.addTask(title.trim());
+      props.addTask(title.trim(), props.id);
       setTitle("");
     } else {
       setError("Title is required");
@@ -64,7 +64,7 @@ export function Todolist(props: PropsType) {
         props.tasks.map(t => {
           const onClickHandler = () => props.removeTask(t.id, props.id)
           const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-            props.changeTaskStatus(t.id, e.currentTarget.checked);
+            props.changeTaskStatus(t.id, e.currentTarget.checked, props.id);
           }
 
           return <li key={t.id} className={t.isDone ? "is-done" : ""}>
