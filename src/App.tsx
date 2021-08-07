@@ -63,7 +63,11 @@ function App() {
   }
 
   function addTodolist(title: string) {
-
+    const copyTodoLists = [...todoLists];
+    const tdID = v1();
+    const newTodolist: TodoListType = {id: tdID, title: title, filter: 'all'};
+    setTodoLists([newTodolist, ...copyTodoLists]);
+    setTasks({[tdID]:[], ...tasks});
   }
 
 
