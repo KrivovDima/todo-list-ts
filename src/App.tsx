@@ -70,6 +70,17 @@ function App() {
     setTasks({[tdID]:[], ...tasks});
   }
 
+  function onChangeTaskTitle(newTitle: string, id: string, tdID: string) {
+    const copyTasks = {...tasks};
+    copyTasks[tdID] = tasks[tdID].map(t => t.id === id ? {...t, title: newTitle} : t);
+    setTasks(copyTasks);
+  }
+
+  function onChangeTodolistTitle (newText: string, tdID: string) {
+    const copyTodoLists = [...todoLists];
+    setTodoLists(copyTodoLists.map(tdList => tdList.id === tdID ? {...tdList, title:newText} : tdList))
+  }
+
 
   return (
     <div className="App">
@@ -95,6 +106,8 @@ function App() {
             changeTaskStatus={changeStatus}
             filter={tl.filter}
             removeTodolist={removeTodolist}
+            onChangeTaskTitle={onChangeTaskTitle}
+            onChangeTodolistTitle={onChangeTodolistTitle}
           />
         })
       }
