@@ -12,6 +12,14 @@ export type TodoListType = {
   title: string
   filter: FilterValuesType
 }
+export type TaskType = {
+  id: string
+  title: string
+  isDone: boolean
+}
+export type TasksStateType = {
+  [key: string] : Array<TaskType>
+}
 
 function App() {
   const todoListID1 = v1();
