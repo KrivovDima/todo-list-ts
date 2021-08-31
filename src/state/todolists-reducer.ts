@@ -3,8 +3,8 @@ import {v1} from "uuid";
 
 type ActionsType = ReturnType<typeof removeTodolistAC>
   | ReturnType<typeof addTodolistAC>
-  | ReturnType<typeof changeTodolistTitle>
-  | ReturnType<typeof changeTodolistFilter>
+  | ReturnType<typeof changeTodolistTitleAC>
+  | ReturnType<typeof changeTodolistFilterAC>
 
 function todolistsReducer(state: Array<TodoListType>, action: ActionsType): Array<TodoListType> {
   switch (action.type) {
@@ -44,7 +44,7 @@ export const addTodolistAC = (title: string) => {
   } as const
 }
 
-export const changeTodolistTitle = (todolistID: string, title: string) => {
+export const changeTodolistTitleAC = (todolistID: string, title: string) => {
   return {
     type: "CHANGE-TODOLIST-TITLE",
     todolistID,
@@ -52,7 +52,7 @@ export const changeTodolistTitle = (todolistID: string, title: string) => {
   } as const
 }
 
-export const changeTodolistFilter = (todolistID: string, filter: FilterValuesType) => {
+export const changeTodolistFilterAC = (todolistID: string, filter: FilterValuesType) => {
   return {
     type: "CHANGE-TODOLIST-FILTER",
     todolistID,
