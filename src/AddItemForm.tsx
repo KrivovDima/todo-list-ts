@@ -11,13 +11,14 @@ export function AddItemForm(props: AddItemFormPropsType) {
   let [error, setError] = useState<string | null>(null)
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.currentTarget.value)
+    setTitle(e.currentTarget.value);
   }
 
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     setError(null);
     if (e.charCode === 13) {
       props.callback(title);
+      setTitle("");
     }
   }
 

@@ -6,7 +6,9 @@ type ActionsType = ReturnType<typeof removeTodolistAC>
   | ReturnType<typeof changeTodolistTitleAC>
   | ReturnType<typeof changeTodolistFilterAC>
 
-function todolistsReducer(state: Array<TodoListType>, action: ActionsType): Array<TodoListType> {
+const initialState: Array<TodoListType> = []
+
+function todolistsReducer(state: Array<TodoListType> = initialState, action: ActionsType): Array<TodoListType> {
   switch (action.type) {
     case "REMOVE-TODOLIST": {
       return state.filter(tdl => tdl.id !== action.todolistID)
