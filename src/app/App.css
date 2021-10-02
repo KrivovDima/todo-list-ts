@@ -24,3 +24,7 @@
   opacity: 0.5;
 }
 */
+
+.progressWrapper {
+  min-height: 4px;
+}

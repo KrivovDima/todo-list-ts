@@ -3,7 +3,7 @@ import axios from 'axios'
 const settings = {
     withCredentials: true,
     headers: {
-        'API-KEY': '8f2534e2-22a4-4052-894e-a66c04807482'
+        'API-KEY': '39fadec0-97c5-4e9f-81f6-b1a36d1cf411'
     }
 }
 const instance = axios.create({
